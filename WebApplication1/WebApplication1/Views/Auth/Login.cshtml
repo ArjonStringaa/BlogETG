@@ -1,0 +1,54 @@
+﻿<link rel="stylesheet" href="~/css/site.css" />
+
+
+@model LoginVewModel
+@{
+
+}
+<body>
+<div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+<form asp-controller="Auth" asp-action="Login" method="post">
+   
+    <h3>Admin Login Panel</h3>
+        <div>
+        <label>User Name</label>
+        <input asp-for="UserName"/>
+    </div>
+    <div>
+        <label>Password</label>
+        <input asp-for="Password"/>
+    </div>
+    <div class="btn">
+    <input type="submit" value="Sign In"/> 
+    </div> 
+    <div class="social">
+          <div class="go"><i class="fab fa-google"></i>  Google</div>
+          <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
+        </div>    
+   
+
+    </form>
+
+    </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

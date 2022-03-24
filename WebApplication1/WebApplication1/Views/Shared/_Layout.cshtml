@@ -1,0 +1,58 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TaskElita</title>
+ 
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<body>
+   
+        <div>
+            <nav> 
+                <ul class="menu">
+          <li > <a asp-controller="Home" asp-action="Index" style="text-decoration:none" >Home</a></li>
+          <li > <a asp-controller="Create" asp-action="Index" style="text-decoration:none" >Create Post</a></li>
+
+        
+          <li><a asp-controller="Panel" asp-action="Index" style="text-decoration:none">Admin Panel</a></li>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+             <li><a asp-controller="Auth" asp-action="Logout" style="text-decoration:none"> Logout</a></li>
+            }
+            else{
+            <li><a asp-controller="Auth" asp-action="Login"style="text-decoration:none"> Sign in</a></li>
+            }
+            </ul>
+            </nav>
+
+        </div>
+        
+  
+        
+    
+    <div >
+        
+            @RenderBody()
+        
+    </div>
+
+    <footer class="border-top footer text-muted bg-footer">
+        <div class="container" >
+            &copy; 2022 - TaskElita - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            All rights reserved
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
