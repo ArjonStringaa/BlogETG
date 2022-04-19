@@ -45,6 +45,12 @@ namespace WebApplication1.Controllers
                     Id=post.Id,
                     Title = post.Title,
                     Body = post.Body,
+                    Description = post.Description,
+                    Category = post.Category,
+                    Tags = post.Tags,
+
+
+
                 });
             }
         }
@@ -62,7 +68,9 @@ namespace WebApplication1.Controllers
                 Title = vm.Title,
                 Body = vm.Body,
                 Image= await _fileManager.SaveImage(vm.Image),
-                
+                Description = vm.Description,
+                Category = vm.Category,
+                Tags = vm.Tags, 
             };
 
             if (post.Id > 0)

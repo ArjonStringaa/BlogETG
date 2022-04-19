@@ -28,11 +28,11 @@ namespace WebApplication1.Controllers
         {
             _repo.AddPost(post);
             if (await _repo.SaveChangesAsync())
-                return RedirectToAction("Index");
+                return RedirectToAction("Index" , "Home");
             else
-            {
+            
                 return View(post);
-            }
+            
         } 
 
 

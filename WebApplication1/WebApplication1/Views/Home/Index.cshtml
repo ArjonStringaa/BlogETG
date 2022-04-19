@@ -1,5 +1,4 @@
-﻿@model IEnumerable<Post>
-
+﻿@model IndexViewModel
 
 
 @{
@@ -7,13 +6,19 @@
 }
 <div class="main-img" >
    <span class="title">Amazing Blog</span>
+   <form class="searchin" asp-controller="Home" asp-action="Index" method="get">
+       <input type="hidden" name="pageNumber" value="@Model.PageNumber"/>
+       <input type="hidden" name="category" value="@Model.Category"/>
+   <input class ="search" type="text" name="search" value="" placeholder="Search Blog"/>
+   </form>
+  
 </div>
 
 
 
 <div class="card-columns">
      
-        @foreach (var post in Model)
+        @foreach (var post in Model.Posts)
         {
        var image_path = $"/Image/{post.Image}";
 <div class="card">
@@ -31,6 +36,17 @@
 
         
         }
+        <div class="pages">
+
+            @if(Model.PageNumber > 1){
+            <a asp-action="Index" asp-controller="Home" asp-route-category="@Model.Category" 
+            asp-route-pageNumber="@(Model.PageNumber - 1)"> back </a>
+            }
+            @if(Model.NextPage){
+            <a asp-action="Index" asp-controller="Home" asp-route-category="@Model.Category" 
+            asp-route-pageNumber="@(Model.PageNumber + 1) ">></a>
+            }
+        </div>
     
 </div>
 

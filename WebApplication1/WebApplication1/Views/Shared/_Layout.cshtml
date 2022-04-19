@@ -6,8 +6,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - TaskElita</title>
- 
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <meta name="description" content=""@ViewBag.Description"/>
+    <meta name="keywords" content=""@ViewBag.Keywords"/>
+
+
+ <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/css/site.css" />
 </head>
 
@@ -17,13 +20,28 @@
             <nav> 
                 <ul class="menu">
           <li > <a asp-controller="Home" asp-action="Index" style="text-decoration:none" >Home</a></li>
-          <li > <a asp-controller="Create" asp-action="Index" style="text-decoration:none" >Create Post</a></li>
 
-        
-          <li><a asp-controller="Panel" asp-action="Index" style="text-decoration:none">Admin Panel</a></li>
+          @if (User.Identity.IsAuthenticated)
+                {
+                    <li > <a asp-controller="Create" asp-action="Index" style="text-decoration:none" >Create Post</a></li>
+                }
+    
+                     @*  <li > <a asp-controller="Home" asp-action="Index" asp-route-category="Programing" style="text-decoration:none" >Programing</a></li>
+
+                       <li > <a asp-controller="Home" asp-action="Index" asp-route-category="Travel" style="text-decoration:none" >Travel</a></li>
+
+                       <li > <a asp-controller="Home" asp-action="Index" asp-route-category="Music" style="text-decoration:none" >Music</a></li>*@
+
 
             @if (User.Identity.IsAuthenticated)
             {
+                @if(User.IsInRole("Admin"))
+                
+                {
+                    <li><a asp-controller="Panel" asp-action="Index" style="text-decoration:none">Admin Panel</a></li>
+
+                }
+
              <li><a asp-controller="Auth" asp-action="Logout" style="text-decoration:none"> Logout</a></li>
             }
             else{
@@ -43,12 +61,12 @@
         
     </div>
 
-    <footer class="border-top footer text-muted bg-footer">
+   @* <footer class="border-top footer text-muted bg-footer">
         <div class="container" >
             &copy; 2022 - TaskElita - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             All rights reserved
         </div>
-    </footer>
+    </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -17,7 +17,7 @@ namespace WebApplication1
             try { 
             var scope = host.Services.CreateScope();
             var ctx = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-            var userMger = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>> ();
+            var userMgr = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>> ();
             var roleMgr = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
             ctx.Database.EnsureCreated();
@@ -44,10 +44,10 @@ namespace WebApplication1
                     UserName = "admin"  ,  
                     Email="admin@test.com"    
                 };
-                userMger.CreateAsync(adminUser, "password").GetAwaiter().GetResult();
+               var result = userMgr.CreateAsync(adminUser, "password").GetAwaiter().GetResult();
 
                 //add role to user
-                userMger.AddToRoleAsync(adminUser ,adminRole.Name).GetAwaiter().GetResult();
+                userMgr.AddToRoleAsync(adminUser ,adminRole.Name).GetAwaiter().GetResult();
             }
             }
             catch(Exception e)

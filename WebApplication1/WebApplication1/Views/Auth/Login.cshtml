@@ -11,7 +11,7 @@
         <div class="shape"></div>
     </div>
 
-<form asp-controller="Auth" asp-action="Login" method="post">
+<form class ="loginform" asp-controller="Auth" asp-action="Login" method="post">
    
     <h3>Admin Login Panel</h3>
         <div>
@@ -24,6 +24,7 @@
     </div>
     <div class="btn">
     <input type="submit" value="Sign In"/> 
+    <a asp-controller="Auth" asp-action="Register">Register</a>
     </div> 
     <div class="social">
           <div class="go"><i class="fab fa-google"></i>  Google</div>

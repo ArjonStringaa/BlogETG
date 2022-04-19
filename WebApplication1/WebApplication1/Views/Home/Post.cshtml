@@ -13,6 +13,15 @@
     }
 <p>@Model.Body</p>*@
 
+      <form method="get"> 
+
+@*   <input class="search" type="text" name="search" value="" placeholder="Search"/>
+*@   <div class="input-group-append"> 
+    <input class="form-control"  />
+       <button type="submit" class="btn btnalert-primary">Search</button>
+   </div>
+   </form>
+
 <div class="container">
 <div class="post">
     <h2 class = "post">@Model.Title</h2>
@@ -27,8 +36,25 @@
 <div class="post-body">
     @Model.Body;
 </div>
-
+@if(User.Identity.IsAuthenticated){
+<div class="comment-section">
+    @{
+       await Html.RenderPartialAsync("_MainComment", new CommentViewModel{PostId = Model.Id, MainCommentId = 0});
+     }
+        @foreach(var c in Model.MainComments)
+        {
+            <p>
+                @c.Message --- @c.Created
+            </p>
+        }
+        </div>
+    }
+    else
+    {
+        <div>
+            <a asp-action="login" asp-controller="Auth">Sign In </a> to comment to the Post.
+        </div>
+    }
 </div>
 
 
-<p style="color:white; font-size:30px;">HERE</p>

@@ -245,6 +245,55 @@ namespace WebApplication1.Migrations
                     b.ToTable("Category");
                 });
 
+            modelBuilder.Entity("WebApplication1.Models.Comments.MainComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MainCommentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PostId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("MainComments");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Comments.SubComment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SubCommentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubCommentId");
+
+                    b.ToTable("SubComments");
+                });
+
             modelBuilder.Entity("WebApplication1.Models.Post", b =>
                 {
                     b.Property<int>("Id")
@@ -255,10 +304,19 @@ namespace WebApplication1.Migrations
                     b.Property<string>("Body")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tags")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -333,6 +391,30 @@ namespace WebApplication1.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Comments.MainComment", b =>
+                {
+                    b.HasOne("WebApplication1.Models.Post", null)
+                        .WithMany("MainComments")
+                        .HasForeignKey("PostId");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Comments.SubComment", b =>
+                {
+                    b.HasOne("WebApplication1.Models.Comments.SubComment", null)
+                        .WithMany("SubComments")
+                        .HasForeignKey("SubCommentId");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Comments.SubComment", b =>
+                {
+                    b.Navigation("SubComments");
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Post", b =>
+                {
+                    b.Navigation("MainComments");
                 });
 #pragma warning restore 612, 618
         }
